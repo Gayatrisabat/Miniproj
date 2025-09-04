@@ -28,8 +28,9 @@ The goal is to make financial education **simple, engaging, and accessible** for
 - **Backend**: Python (Flask/Django)  
 - **Database**: SQL (MySQL/PostgreSQL/SQLite)  
 - **APIs**: YouTube API for video content  
-##File structure
+## 📂 Project Structure
 
+```
 backend/
 │── main.py                # FastAPI entry point
 │── routes/                # All API route modules
@@ -43,6 +44,7 @@ backend/
 │
 │── models/                # (Optional) Pydantic schemas
 │── .venv/                 # Virtual environment
+```
 
 
 ---
@@ -65,6 +67,7 @@ pip install -r requirements.txt
 
 # Run the FastAPI server
 uvicorn main:app --reload
+
 
 
 
