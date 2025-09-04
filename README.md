@@ -29,4 +29,19 @@ The goal is to make financial education **simple, engaging, and accessible** for
 - **Database**: SQL (MySQL/PostgreSQL/SQLite)  
 - **APIs**: YouTube API for video content  
 
+backend/
+│── main.py                # FastAPI entry point
+│── routes/                # All API route modules
+│    ├── auth.py           # Login/signup, Firebase Auth
+│    ├── quiz.py           # Quiz APIs (fetch questions, submit answers)
+│    ├── game.py           # Drag-and-drop game APIs
+│    ├── upload.py         # File upload API
+│
+│── database/              
+│    ├── firebase.py       # Firebase Firestore connectivity
+│
+│── models/                # (Optional) Pydantic schemas
+│── .venv/                 # Virtual environment
+
+
 
