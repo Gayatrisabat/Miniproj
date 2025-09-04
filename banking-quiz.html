@@ -1,0 +1,440 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banking Basics Quiz & Flashcards</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #121212;
+      color: #f5f5f5;
+      margin: 0;
+      padding: 2rem;
+    }
+    h1, h2 {
+      color: #ff6600;
+      text-align: center;
+    }
+    .quiz-container, .flashcards-container {
+      max-width: 700px;
+      margin: 2rem auto;
+      background: #1e1e1e;
+      padding: 2rem;
+      border-radius: 8px;
+    }
+    .question {
+      margin-bottom: 1rem;
+    }
+    .options {
+      list-style: none;
+      padding: 0;
+    }
+    .options li {
+      margin-bottom: 0.8rem;
+    }
+    input[type="radio"] {
+      margin-right: 0.5rem;
+    }
+    .btn {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      background: #db6e34;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background: #ff6a06;
+    }
+    .result {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 1.5rem;
+    }
+
+    /* Flashcards */
+    .flashcards-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .flashcard {
+      perspective: 1000px;
+    }
+    .flashcard-inner {
+      position: relative;
+      width: 100%;
+      padding: 1rem;
+      background: #292929;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transition: transform 0.6s;
+    }
+    .flashcard.flipped .flashcard-inner {
+      transform: rotateY(180deg);
+    }
+    .flashcard-front,
+    .flashcard-back {
+      position: absolute;
+      width: 100%;
+      backface-visibility: hidden;
+      text-align: center;
+    }
+    .flashcard-back {
+      transform: rotateY(180deg);
+      color: #00ffcc;
+    }
+  </style>
+</head>
+<body>
+  <h1>Banking Basics Quiz</h1>
+  <div class="quiz-container" id="quiz-container"></div>
+
+  <h2>Flashcards</h2>
+  <div class="flashcards-container" id="flashcards-container"></div>
+
+  <script>
+    // --- Quiz Data ---
+    const quizData = [
+      {
+        question: "What is the main function of a bank?",
+        options: ["Accept deposits and provide loans", "Sell groceries", "Manufacture electronics", "Offer only savings accounts"],
+        answer: "Accept deposits and provide loans"
+      },
+      {
+        question: "Which account is ideal for businesses with frequent transactions?",
+        options: ["Savings Account", "Current Account", "Fixed Deposit", "Recurring Deposit"],
+        answer: "Current Account"
+      },
+      {
+        question: "What is a key benefit of using a credit card responsibly?",
+        options: ["Build credit history", "Increase debt", "Avoid taxes", "Store physical cash"],
+        answer: "Build credit history"
+      },
+      {
+        question: "Which type of loan would you take to buy a house?",
+        options: ["Education Loan", "Home Loan", "Car Loan", "Personal Loan"],
+        answer: "Home Loan"
+      },
+      {
+        question: "A common mistake when taking loans is:",
+        options: ["Borrowing only what’s necessary", "Comparing interest rates", "Missing EMI payments", "Paying on time"],
+        answer: "Missing EMI payments"
+      }
+    ];
+
+    const container = document.getElementById("quiz-container");
+    let currentQuestion = 0;
+    let score = 0;
+
+    function loadQuestion() {
+      if (currentQuestion >= quizData.length) {
+        container.innerHTML = `<div class="result">Your score: ${score} / ${quizData.length} <br><br>
+          <a href="banking-basics.html" class="btn">Back to Lessons</a>
+        </div>`;
+        return;
+      }
+
+      const q = quizData[currentQuestion];
+      container.innerHTML = `
+        <div class="question"><strong>Q${currentQuestion + 1}:</strong> ${q.question}</div>
+        <ul class="options">
+          ${q.options.map(opt => `<li><label><input type="radio" name="option" value="${opt}"> ${opt}</label></li>`).join('')}
+        </ul>
+        <button class="btn" onclick="submitAnswer()">Submit</button>
+      `;
+    }
+
+    function submitAnswer() {
+      const selected = document.querySelector('input[name="option"]:checked');
+      if (!selected) {
+        alert("Please select an answer!");
+        return;
+      }
+      if (selected.value === quizData[currentQuestion].answer) score++;
+      currentQuestion++;
+      loadQuestion();
+    }
+
+    loadQuestion();
+
+    // --- Flashcards Data ---
+    const flashcardsData = [
+      {term: "Banking", definition: "The process of accepting deposits and providing loans through financial institutions."},
+      {term: "Savings Account", definition: "Store money safely, earn small interest, withdraw anytime."},
+      {term: "Current Account", definition: "For businesses; allows frequent transactions, no interest earned."},
+      {term: "Fixed Deposit (FD)", definition: "Money locked for a fixed time period, earns higher interest."},
+      {term: "Recurring Deposit (RD)", definition: "Deposit a fixed amount monthly to build savings habit."},
+      {term: "Credit Card", definition: "Spend now, pay later; helps build credit history if used responsibly."},
+      {term: "EMI", definition: "Equated Monthly Installment; monthly payment to repay a loan."}
+    ];
+
+    const flashContainer = document.getElementById("flashcards-container");
+
+    flashcardsData.forEach(card => {
+      const cardDiv = document.createElement("div");
+      cardDiv.className = "flashcard";
+      cardDiv.innerHTML = `
+        <div class="flashcard-inner">
+          <div class="flashcard-front"><strong>${card.term}</strong></div>
+          <div class="flashcard-back">${card.definition}</div>
+        </div>`;
+      flashContainer.appendChild(cardDiv);
+    });
+
+    // Auto-flip animation one after another
+    let currentIndex = 0;
+    function flipNextCard() {
+      const cards = document.querySelectorAll(".flashcard");
+      cards.forEach(c => c.classList.remove("flipped"));
+      cards[currentIndex].classList.add("flipped");
+      currentIndex = (currentIndex + 1) % cards.length;
+    }
+    setInterval(flipNextCard, 3000);
+  </script>
+</body>
+</html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banking Basics Quiz & Flashcards</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #121212;
+      color: #f5f5f5;
+      margin: 0;
+      padding: 2rem;
+    }
+    h1, h2 {
+      color: #ff6600;
+      text-align: center;
+    }
+    .quiz-container, .flashcards-container {
+      max-width: 700px;
+      margin: 2rem auto;
+      background: #1e1e1e;
+      padding: 2rem;
+      border-radius: 8px;
+    }
+    .question {
+      margin-bottom: 1rem;
+    }
+    .options {
+      list-style: none;
+      padding: 0;
+    }
+    .options li {
+      margin-bottom: 0.8rem;
+    }
+    input[type="radio"] {
+      margin-right: 0.5rem;
+    }
+    .btn {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      background: #db6e34;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background: #ff6a06;
+    }
+    .result {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 1.5rem;
+    }
+
+    /* Flashcards */
+    .flashcards-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .flashcard {
+      perspective: 1000px;
+    }
+    .flashcard-inner {
+      position: relative;
+      width: 100%;
+      padding: 1rem;
+      background: #292929;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transition: transform 0.6s;
+    }
+    .flashcard.flipped .flashcard-inner {
+      transform: rotateY(180deg);
+    }
+    .flashcard-front,
+    .flashcard-back {
+      position: absolute;
+      width: 100%;
+      backface-visibility: hidden;
+      text-align: center;
+    }
+    .flashcard-back {
+      transform: rotateY(180deg);
+      color: #00ffcc;
+    }
+  </style>
+</head>
+<body>
+  <h1>Banking Basics Quiz</h1>
+  <div class="quiz-container" id="quiz-container"></div>
+
+  <h2>Flashcards</h2>
+  <div class="flashcards-container" id="flashcards-container"></div>
+
+  <script>
+    // --- Quiz Data ---
+        const quizData = [
+      {
+        question: "What is the main function of a bank?",
+        options: ["Accept deposits and provide loans", "Sell groceries", "Manufacture electronics", "Offer only savings accounts"],
+        answer: "Accept deposits and provide loans"
+      },
+      {
+        question: "Which account is ideal for businesses with frequent transactions?",
+        options: ["Savings Account", "Current Account", "Fixed Deposit", "Recurring Deposit"],
+        answer: "Current Account"
+      },
+      {
+        question: "What is a key benefit of using a credit card responsibly?",
+        options: ["Build credit history", "Increase debt", "Avoid taxes", "Store physical cash"],
+        answer: "Build credit history"
+      },
+      {
+        question: "Which type of loan would you take to buy a house?",
+        options: ["Education Loan", "Home Loan", "Car Loan", "Personal Loan"],
+        answer: "Home Loan"
+      },
+      {
+        question: "A common mistake when taking loans is:",
+        options: ["Borrowing only what’s necessary", "Comparing interest rates", "Missing EMI payments", "Paying on time"],
+        answer: "Missing EMI payments"
+      },
+      {
+        question: "What does EMI stand for?",
+        options: ["Easy Money Installment", "Equated Monthly Installment", "Equal Mortgage Interest", "Every Month Interest"],
+        answer: "Equated Monthly Installment"
+      },
+      {
+        question: "Which is a safe practice in personal finance?",
+        options: ["Spending more than you earn", "Ignoring bank statements", "Paying EMIs on time", "Taking unnecessary loans"],
+        answer: "Paying EMIs on time"
+      }
+    ];
+
+    const container = document.getElementById("quiz-container");
+    let currentQuestion = 0;
+    let score = 0;
+
+    function loadQuestion() {
+      if (currentQuestion >= quizData.length) {
+  if (score >= 5) {
+    container.innerHTML = `<div class="result">
+      🎉 Congrats! You passed.<br>
+      Your score: ${score} / ${quizData.length} <br><br>
+      <a href="banking-basics.html" class="btn">Back to Lessons</a>
+      <a href="next-module.html" class="btn">Go to Next Module</a>
+    </div>`;
+  } else {
+    container.innerHTML = `<div class="result">
+      ❌ You scored ${score} / ${quizData.length}.<br>
+      Minimum 5 required to pass.<br><br>
+      <a href="banking-basics.html" class="btn">Review Lessons</a>
+      <button class="btn" onclick="restartQuiz()">Retry Quiz</button>
+    </div>`;
+  }
+  return;
+}
+
+
+      const q = quizData[currentQuestion];
+      container.innerHTML = `
+        <div class="question"><strong>Q${currentQuestion + 1}:</strong> ${q.question}</div>
+        <ul class="options">
+          ${q.options.map(opt => `<li><label><input type="radio" name="option" value="${opt}"> ${opt}</label></li>`).join('')}
+        </ul>
+        <button class="btn" onclick="submitAnswer()">Submit</button>
+      `;
+    }
+
+    function submitAnswer() {
+      const selected = document.querySelector('input[name="option"]:checked');
+      if (!selected) {
+        alert("Please select an answer!");
+        return;
+      }
+      if (selected.value === quizData[currentQuestion].answer) score++;
+      currentQuestion++;
+      loadQuestion();
+    }
+
+    loadQuestion();
+
+    // --- Flashcards Data ---
+    const flashcardsData = [
+      {term: "Banking", definition: "The process of accepting deposits and providing loans through financial institutions."},
+      {term: "Savings Account", definition: "Store money safely, earn small interest, withdraw anytime."},
+      {term: "Current Account", definition: "For businesses; allows frequent transactions, no interest earned."},
+      {term: "Fixed Deposit (FD)", definition: "Money locked for a fixed time period, earns higher interest."},
+      {term: "Recurring Deposit (RD)", definition: "Deposit a fixed amount monthly to build savings habit."},
+      {term: "Credit Card", definition: "Spend now, pay later; helps build credit history if used responsibly."},
+      {term: "EMI", definition: "Equated Monthly Installment; monthly payment to repay a loan."}
+    ];
+
+    const flashContainer = document.getElementById("flashcards-container");
+
+    flashcardsData.forEach(card => {
+      const cardDiv = document.createElement("div");
+      cardDiv.className = "flashcard";
+      cardDiv.innerHTML = `
+        <div class="flashcard-inner">
+          <div class="flashcard-front"><strong>${card.term}</strong></div>
+          <div class="flashcard-back">${card.definition}</div>
+        </div>`;
+      flashContainer.appendChild(cardDiv);
+    });
+
+    // Auto-flip animation one after another
+    let currentIndex = 0;
+    function flipNextCard() {
+      const cards = document.querySelectorAll(".flashcard");
+      cards.forEach(c => c.classList.remove("flipped"));
+      cards[currentIndex].classList.add("flipped");
+      currentIndex = (currentIndex + 1) % cards.length;
+    }
+
+    setInterval(flipNextCard, 3000);
+    
+    function restartQuiz() {
+  currentQuestion = 0;
+  score = 0;
+  loadQuestion();
+}
+
+  </script>
+</body>
+</html>
+>>>>>>> 46b0f4e (Initial backend setup with FastAPI)

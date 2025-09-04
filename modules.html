@@ -1,0 +1,386 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modules | FinLearn</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #000000, #170f0fc8);
+      color: #f9f1f1;
+    }
+
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background: rgba(24, 24, 24, 0.95);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav .logo a {
+      color: #202020;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 22px;
+    }
+    nav ul {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+    }
+    nav ul li a {
+      color: #f9f1f1;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover {
+      color: #d58e2a;
+    }
+    nav .btn-login {
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: #ff600f;
+      color: #260d0d;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    nav .btn-login:hover {
+      background: #dc5d1e;
+    }
+
+    /* Page header */
+    .page-header {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .page-header h1 {
+      font-size: 32px;
+      color: #ff600f;
+    }
+    .page-header p {
+      color: #e1cbcb;
+      margin-top: 10px;
+      font-size: 18px;
+    }
+
+    /* Modules Grid */
+    .modules-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      padding: 20px 40px 60px;
+    }
+    .module-card {
+      background: rgb(59, 42, 30);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      border: 1px solid #ff600f;
+    }
+    .module-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 25px rgba(248, 75, 56, 0.4);
+      border-color: #ff600f;
+    }
+    .module-card h3 {
+      margin: 0 0 10px;
+      color: #f1f5f9;
+      font-size: 20px;
+    }
+    .module-card p {
+      color: #cbd5e1;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+    .module-card a {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      background: #ff600f;
+      color: #230d0d;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .module-card a:hover {
+      background: #e9860e;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo"><a href="index.html">FinLearn</a></div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="modules.html">Modules</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="profile-dashboard.html" class="btn-login">Profile</a> 
+  </nav>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <h1>Learning Modules</h1>
+    <p>Choose a module and start your journey toward financial freedom 🚀</p>
+  </div>
+
+  <!-- Modules List -->
+  <div class="modules-container">
+    <div class="module-card">
+      <h3>💰 Introduction to Money</h3>
+      <p>Understand what money is, its importance, and how it flows in our daily lives.</p>
+      <a href="module-intro-money.html">>Start Module</a>
+    </div>
+
+    <div class="module-card">
+      <h3>🏦 Banking Basics</h3>
+      <p>Learn about accounts, UPI, debit/credit cards, and safe banking practices.</p>
+      <a href="banking-basics.html">Start Module</a>
+    </div>
+
+    <div class="module-card">
+      <h3>📊 Budgeting & Saving</h3>
+      <p>Discover how to manage expenses, set savings goals, and build habits.</p>
+      <a href="budgeting.html">Start Module</a>
+    </div>
+
+    <div class="module-card">
+      <h3>📈 Basics of Investing</h3>
+      <p>Dive into mutual funds, SIPs, and the importance of compounding.</p>
+      <a href="investing.html">Start Module</a>
+    </div>
+
+    <div class="module-card">
+      <h3>💡 Personal Finance</h3>
+      <p>Learn about income, loans, insurance, and financial planning for life.</p>
+      <a href="personal-finance.html">Start Module</a>
+    </div>
+
+    <div class="module-card">
+      <h3>📉 Stock Market</h3>
+      <p>Understand shares, trading, and risks before diving into the market.</p>
+      <a href="module-details.html?module=6">Start Module</a>
+    </div>
+
+    <div class="module-card">
+      <h3>🪙 Cryptocurrency</h3>
+      <p>Get started with Bitcoin, Ethereum, and blockchain in a simple way.</p>
+      <a href="module-details.html?module=7">Start Module</a>
+    </div>
+  </div>
+
+</body>
+</html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modules | FinLearn</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #000000, #170f0fc8);
+      color: #f9f1f1;
+    }
+
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background: rgba(24, 24, 24, 0.95);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav .logo a {
+      color: #202020;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 22px;
+    }
+    nav ul {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+    }
+    nav ul li a {
+      color: #f9f1f1;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover {
+      color: #d58e2a;
+    }
+    nav .btn-login {
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: #ff600f;
+      color: #260d0d;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    nav .btn-login:hover {
+      background: #dc5d1e;
+    }
+
+    /* Page header */
+    .page-header {
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .page-header h1 {
+      font-size: 32px;
+      color: #ff600f;
+    }
+    .page-header p {
+      color: #e1cbcb;
+      margin-top: 10px;
+      font-size: 18px;
+    }
+
+    /* Modules Grid */
+    .modules-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      padding: 20px 40px 60px;
+    }
+    .module-card {
+      background: rgb(59, 42, 30);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      border: 1px solid #ff600f;
+    }
+    .module-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 25px rgba(248, 75, 56, 0.4);
+      border-color: #ff600f;
+    }
+    .module-card h3 {
+      margin: 0 0 10px;
+      color: #f1f5f9;
+      font-size: 20px;
+    }
+    .module-card p {
+      color: #cbd5e1;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+    .module-card a {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      background: #ff600f;
+      color: #230d0d;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .module-card a:hover {
+      background: #e9860e;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo"><a href="index.html">FinLearn</a></div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="modules.html">Modules</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="profile.html">Profile</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="profile-dashboard.html" class="btn-login">Profile</a> 
+  </nav>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <h1>Learning Modules</h1>
+    <p>Choose a module and start your journey toward financial freedom 🚀</p>
+  </div>
+
+  <!-- Modules List -->
+  <div class="modules-container">
+    <div class="module-card">
+      <h3>💰 Introduction to Money</h3>
+      <p>Understand what money is, its importance, and how it flows in our daily lives.</p>
+      <a href="module-intro-money.html">>Start Module</a>
+    </div>
+
+    <div class="module-card">
+      <h3>🏦 Banking Basics</h3>
+      <p>Learn about accounts, UPI, debit/credit cards, and safe banking practices.</p>
+      <a href="banking-basics.html">Start Module</a>
+    </div>
+
+    <div class="module-card">
+      <h3>📊 Budgeting & Saving</h3>
+      <p>Discover how to manage expenses, set savings goals, and build habits.</p>
+      <a href="budgeting.html">Start Module</a>
+    </div>
+
+    <div class="module-card">
+      <h3>📈 Basics of Investing</h3>
+      <p>Dive into mutual funds, SIPs, and the importance of compounding.</p>
+      <a href="investing.html">Start Module</a>
+    </div>
+
+    <div class="module-card">
+      <h3>💡 Personal Finance</h3>
+      <p>Learn about income, loans, insurance, and financial planning for life.</p>
+      <a href="personal-finance.html">Start Module</a>
+    </div>
+
+    <div class="module-card">
+      <h3>📉 Stock Market</h3>
+      <p>Understand shares, trading, and risks before diving into the market.</p>
+      <a href="module-details.html?module=6">Start Module</a>
+    </div>
+
+    <div class="module-card">
+      <h3>🪙 Cryptocurrency</h3>
+      <p>Get started with Bitcoin, Ethereum, and blockchain in a simple way.</p>
+      <a href="module-details.html?module=7">Start Module</a>
+    </div>
+  </div>
+
+</body>
+</html>
+>>>>>>> 46b0f4e (Initial backend setup with FastAPI)
+AIzaSyDjPaWY8FaTvO1nZRxbAcH13QG1znhjrHA

@@ -1,0 +1,207 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module Detail</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="modules.html">Modules</a>
+  </nav>
+
+  <div class="module-detail">
+    <h2 id="moduleTitle"></h2>
+    <p id="lessonText"></p>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="lessonProgress">0%</div>
+    </div>
+
+    <div class="lesson-nav">
+      <button onclick="prevLesson()">⬅ Previous</button>
+      <button onclick="nextLesson()">Next ➡</button>
+    </div>
+
+    <button id="completeBtn" onclick="completeModule()" style="display:none;">
+      ✅ Mark Module as Complete
+    </button>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const moduleId = urlParams.get("id");
+
+    const lessons = {
+      budgeting: [
+        "Lesson 1: Why budgeting matters",
+        "Lesson 2: Tracking income",
+        "Lesson 3: Tracking expenses",
+        "Lesson 4: Building a simple budget",
+        "Lesson 5: Tips to save money"
+      ],
+      credit: [
+        "Lesson 1: What is credit?",
+        "Lesson 2: How loans work",
+        "Lesson 3: Understanding interest rates",
+        "Lesson 4: Good vs Bad credit",
+        "Lesson 5: How to maintain healthy credit"
+      ],
+      investing: [
+        "Lesson 1: Why save and invest?",
+        "Lesson 2: Savings vs Investments",
+        "Lesson 3: Different types of investments",
+        "Lesson 4: Risk vs Reward",
+        "Lesson 5: Beginner’s investment tips"
+      ]
+    };
+
+    let currentLesson = 0;
+    const moduleLessons = lessons[moduleId];
+
+    function loadLesson() {
+      document.getElementById("moduleTitle").innerText = moduleId.toUpperCase() + " Module";
+      document.getElementById("lessonText").innerText = moduleLessons[currentLesson];
+
+      const progress = Math.round(((currentLesson + 1) / moduleLessons.length) * 100);
+      document.getElementById("lessonProgress").style.width = progress + "%";
+      document.getElementById("lessonProgress").innerText = progress + "%";
+
+      if (currentLesson === moduleLessons.length - 1) {
+        document.getElementById("completeBtn").style.display = "block";
+      }
+    }
+
+    function nextLesson() {
+      if (currentLesson < moduleLessons.length - 1) {
+        currentLesson++;
+        loadLesson();
+      }
+    }
+
+    function prevLesson() {
+      if (currentLesson > 0) {
+        currentLesson--;
+        loadLesson();
+      }
+    }
+
+    function completeModule() {
+      let modules = JSON.parse(localStorage.getItem("modules")) || {};
+      modules[moduleId] = { status: "completed" };
+      localStorage.setItem("modules", JSON.stringify(modules));
+      alert("🎉 Module marked as completed!");
+      window.location.href = "dashboard.html";
+    }
+
+    loadLesson();
+  </script>
+</body>
+</html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module Detail</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="modules.html">Modules</a>
+  </nav>
+
+  <div class="module-detail">
+    <h2 id="moduleTitle"></h2>
+    <p id="lessonText"></p>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="lessonProgress">0%</div>
+    </div>
+
+    <div class="lesson-nav">
+      <button onclick="prevLesson()">⬅ Previous</button>
+      <button onclick="nextLesson()">Next ➡</button>
+    </div>
+
+    <button id="completeBtn" onclick="completeModule()" style="display:none;">
+      ✅ Mark Module as Complete
+    </button>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const moduleId = urlParams.get("id");
+
+    const lessons = {
+      budgeting: [
+        "Lesson 1: Why budgeting matters",
+        "Lesson 2: Tracking income",
+        "Lesson 3: Tracking expenses",
+        "Lesson 4: Building a simple budget",
+        "Lesson 5: Tips to save money"
+      ],
+      credit: [
+        "Lesson 1: What is credit?",
+        "Lesson 2: How loans work",
+        "Lesson 3: Understanding interest rates",
+        "Lesson 4: Good vs Bad credit",
+        "Lesson 5: How to maintain healthy credit"
+      ],
+      investing: [
+        "Lesson 1: Why save and invest?",
+        "Lesson 2: Savings vs Investments",
+        "Lesson 3: Different types of investments",
+        "Lesson 4: Risk vs Reward",
+        "Lesson 5: Beginner’s investment tips"
+      ]
+    };
+
+    let currentLesson = 0;
+    const moduleLessons = lessons[moduleId];
+
+    function loadLesson() {
+      document.getElementById("moduleTitle").innerText = moduleId.toUpperCase() + " Module";
+      document.getElementById("lessonText").innerText = moduleLessons[currentLesson];
+
+      const progress = Math.round(((currentLesson + 1) / moduleLessons.length) * 100);
+      document.getElementById("lessonProgress").style.width = progress + "%";
+      document.getElementById("lessonProgress").innerText = progress + "%";
+
+      if (currentLesson === moduleLessons.length - 1) {
+        document.getElementById("completeBtn").style.display = "block";
+      }
+    }
+
+    function nextLesson() {
+      if (currentLesson < moduleLessons.length - 1) {
+        currentLesson++;
+        loadLesson();
+      }
+    }
+
+    function prevLesson() {
+      if (currentLesson > 0) {
+        currentLesson--;
+        loadLesson();
+      }
+    }
+
+    function completeModule() {
+      let modules = JSON.parse(localStorage.getItem("modules")) || {};
+      modules[moduleId] = { status: "completed" };
+      localStorage.setItem("modules", JSON.stringify(modules));
+      alert("🎉 Module marked as completed!");
+      window.location.href = "dashboard.html";
+    }
+
+    loadLesson();
+  </script>
+</body>
+</html>
+>>>>>>> 46b0f4e (Initial backend setup with FastAPI)

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Financial Onboarding – Gig & Freelance</title>
+<style>
+  :root{
+    --bg:#0f172a; /* slate-900 */
+    --card:#111827; /* gray-900 */
+    --muted:#94a3b8; /* slate-400 */
+    --text:#e5e7eb; /* gray-200 */
+    --brand:#22c55e; /* green-500 */
+    --accent:#38bdf8; /* sky-400 */
+    --danger:#ef4444; /* red-500 */
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial;
+    background:linear-gradient(180deg,#0b1024, #0f172a 30%, #0b1024);
+    color:var(--text);
+    min-height:100dvh; display:flex; align-items:center; justify-content:center; padding:32px;
+  }
+  .container{
+    width:100%; max-width:920px; background:rgba(17,24,39,.9);
+    border:1px solid rgba(255,255,255,.06); border-radius:20px; padding:28px;
+    box-shadow:0 20px 60px rgba(0,0,0,.5), inset 0 0 120px rgba(56,189,248,.06);
+    backdrop-filter: blur(6px);
+  }
+  header{display:flex; align-items:center; gap:12px; margin-bottom:16px}
+  header .dot{width:10px; height:10px; border-radius:999px; background:var(--brand); box-shadow:0 0 12px var(--brand)}
+  h1{margin:0; font-size:22px; letter-spacing:.3px}
+  p.sub{margin:.25rem 0 0; color:var(--muted); font-size:14px}
+  .stepper{display:flex; gap:8px; margin:18px 0 14px}
+  .chip{
+    padding:6px 10px; border-radius:999px; font-size:12px; color:var(--muted);
+    border:1px solid rgba(255,255,255,.08);
+  }
+  .chip.active{background:rgba(34,197,94,.15); color:#dcfce7; border-color:rgba(34,197,94,.35)}
+  form{display:grid; gap:18px}
+  fieldset{
+    border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:16px; margin:0;
+    background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+  }
+  legend{padding:0 8px; color:#c7d2fe; font-weight:600; font-size:14px}
+  .group{display:grid; gap:10px; margin-top:6px}
+  .row{display:flex; flex-wrap:wrap; gap:10px}
+  label.opt{
+    display:inline-flex; align-items:center; gap:8px; padding:8px 10px;
+    border:1px solid rgba(255,255,255,.08); border-radius:10px; cursor:pointer;
+    background:rgba(255,255,255,.02);
+  }
+  input[type="radio"], input[type="checkbox"]{accent-color:var(--brand); width:16px; height:16px; cursor:pointer}
+  .error{color:var(--danger); font-size:13px; display:none}
+  .actions{display:flex; gap:10px; justify-content:flex-end; margin-top:4px}
+  button{
+    border:0; padding:10px 16px; border-radius:12px; cursor:pointer; font-weight:600;
+    transition:.15s transform ease, .15s opacity ease;
+  }
+  .btn-primary{background:var(--brand); color:#052e16}
+  .btn-secondary{background:#0b1324; color:#cbd5e1; border:1px solid rgba(255,255,255,.08)}
+  button:active{transform:translateY(1px)}
+  .summary{
+    margin-top:10px; padding:14px; border:1px dashed rgba(56,189,248,.4); border-radius:14px;
+    background:rgba(56,189,248,.06); display:none;
+  }
+  pre{margin:0; white-space:pre-wrap; word-break:break-word; font-size:12.5px; color:#e2e8f0}
+  .hint{font-size:12px; color:var(--muted)}
+</style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="dot"></div>
+      <div>
+        <h1>Tell us about your money workflow</h1>
+        <p class="sub">We’ll personalize your learning path for gig work & freelancing.</p>
+      </div>
+    </header>
+
+    <div class="stepper" id="stepper">
+      <span class="chip active">1 · Work & Income</span>
+      <span class="chip">2 · Challenges & Goal</span>
+      <span class="chip">3 · Learning Style</span>
+      <span class="chip">4 · Quick Check</span>
+      <span class="chip">5 · Review</span>
+    </div>
+
+    <form id="onboardingForm" novalidate>
+      <!-- STEP 1 -->
+      <fieldset data-step="1">
+        <legend>Work & Income Profile</legend>
+        <div class="group">
+          <div class="row" id="earnType">
+            <label class="opt"><input type="radio" name="earn_type" value="freelancing" required> Freelancing (clients/projects)</label>
+            <label class="opt"><input type="radio" name="earn_type" value="gig"> Gig work (delivery/ride/services)</label>
+            <label class="opt"><input type="radio" name="earn_type" value="side_hustle"> Side hustle (store/creator/tutoring)</label>
+            <label class="opt"><input type="radio" name="earn_type" value="multiple"> Multiple income sources</label>
+          </div>
+          <span class="error" data-error="earn_type">Please choose how you earn.</span>
+
+          <div class="row" id="incomePattern">
+            <label class="opt"><input type="radio" name="income_pattern" value="fixed" required> Fixed (similar every month)</label>
+            <label class="opt"><input type="radio" name="income_pattern" value="irregular"> Irregular (varies)</label>
+            <label class="opt"><input type="radio" name="income_pattern" value="seasonal"> Seasonal (demand-based)</label>
+          </div>
+          <span class="error" data-error="income_pattern">Select your income pattern.</span>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn-primary" data-next>Next</button>
+        </div>
+      </fieldset>
+
+      <!-- STEP 2 -->
+      <fieldset data-step="2" hidden>
+        <legend>Your Challenges & Primary Goal</legend>
+        <div class="group">
+          <div>Biggest challenges (select at least one)</div>
+          <div class="row" id="challenges">
+            <label class="opt"><input type="checkbox" name="challenges" value="irregular_income"> Managing irregular income</label>
+            <label class="opt"><input type="checkbox" name="challenges" value="saving"> Saving consistently</label>
+            <label class="opt"><input type="checkbox" name="challenges" value="debt"> Paying off debt / loans</label>
+            <label class="opt"><input type="checkbox" name="challenges" value="taxes"> Understanding taxes & compliance</label>
+            <label class="opt"><input type="checkbox" name="challenges" value="investing"> Investing & growth</label>
+          </div>
+          <span class="error" data-error="challenges">Select at least one challenge.</span>
+
+          <div style="margin-top:8px">What do you want to focus on first?</div>
+          <div class="row" id="goal">
+            <label class="opt"><input type="radio" name="goal" value="budget_irregular" required> Budgeting with irregular income</label>
+            <label class="opt"><input type="radio" name="goal" value="emergency_savings"> Emergency savings</label>
+            <label class="opt"><input type="radio" name="goal" value="debt_credit"> Debt & credit management</label>
+            <label class="opt"><input type="radio" name="goal" value="taxes_freelance"> Taxes for freelancers/gigs</label>
+            <label class="opt"><input type="radio" name="goal" value="investing_basics"> Investing basics</label>
+            <label class="opt"><input type="radio" name="goal" value="long_term"> Long-term stability & insurance</label>
+          </div>
+          <span class="error" data-error="goal">Please choose your starting goal.</span>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn-secondary" data-prev>Back</button>
+          <button type="button" class="btn-primary" data-next>Next</button>
+        </div>
+      </fieldset>
+
+      <!-- STEP 3 -->
+      <fieldset data-step="3" hidden>
+        <legend>Learning Preference</legend>
+        <div class="group">
+          <div class="row" id="preferences">
+            <label class="opt"><input type="checkbox" name="pref" value="guides"> Short guides & examples</label>
+            <label class="opt"><input type="checkbox" name="pref" value="quizzes"> Interactive quizzes & scenarios</label>
+            <label class="opt"><input type="checkbox" name="pref" value="videos"> Short videos</label>
+          </div>
+          <span class="hint">Pick at least one so we prioritize formats you enjoy.</span>
+          <span class="error" data-error="pref">Choose at least one learning preference.</span>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn-secondary" data-prev>Back</button>
+          <button type="button" class="btn-primary" data-next>Next</button>
+        </div>
+      </fieldset>
+
+      <!-- STEP 4 -->
+      <fieldset data-step="4" hidden>
+        <legend>Quick Money Check (3 MCQs)</legend>
+        <div class="group">
+          <div>Q1. You earn ₹20,000 this month and ₹10,000 next month. Best budgeting approach?</div>
+          <div class="row">
+            <label class="opt"><input type="radio" name="q1" value="save_from_high" required> Save from this month to cover next</label>
+            <label class="opt"><input type="radio" name="q1" value="spend_all"> Spend everything this month</label>
+            <label class="opt"><input type="radio" name="q1" value="take_loan"> Take a loan next month</label>
+          </div>
+          <span class="error" data-error="q1">Please answer Q1.</span>
+
+          <div>Q2. Freelancers in India must pay income tax if annual income is more than:</div>
+          <div class="row">
+            <label class="opt"><input type="radio" name="q2" value="2_5" required> ₹2.5 lakh</label>
+            <label class="opt"><input type="radio" name="q2" value="10"> ₹10 lakh</label>
+            <label class="opt"><input type="radio" name="q2" value="50k"> ₹50,000</label>
+          </div>
+          <span class="error" data-error="q2">Please answer Q2.</span>
+
+          <div>Q3. Best place to keep an emergency fund:</div>
+          <div class="row">
+            <label class="opt"><input type="radio" name="q3" value="liquid" required> Bank / liquid fund (easy access)</label>
+            <label class="opt"><input type="radio" name="q3" value="stocks"> High-risk stocks</label>
+            <label class="opt"><input type="radio" name="q3" value="crypto"> Crypto only</label>
+          </div>
+          <span class="error" data-error="q3">Please answer Q3.</span>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn-secondary" data-prev>Back</button>
+          <button type="button" class="btn-primary" data-next>Next</button>
+        </div>
+      </fieldset>
+
+      <!-- STEP 5 -->
+      <fieldset data-step="5" hidden>
+        <legend>Review & Submit</legend>
+        <div class="group">
+          <div class="hint">We’ll store this to personalize your path. You can update it later.</div>
+          <div class="summary" id="summaryBox">
+            <pre id="summaryPre"></pre>
+          </div>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn-secondary" data-prev>Back</button>
+          <button type="submit" class="btn-primary">Finish & Get Path</button>
+        </div>
+      </fieldset>
+    </form>
+
+    <div class="summary" id="resultBox">
+      <strong>✅ Recommendation ready</strong>
+      <div id="recText" style="margin-top:6px;"></div>
+      <pre id="payloadPre" style="margin-top:10px;"></pre>
+    </div>
+  </div>
+
+<script>
+(function(){
+  const form = document.getElementById('onboardingForm');
+  const fieldsets = [...form.querySelectorAll('fieldset')];
+  const stepper = document.getElementById('stepper').children;
+  let step = 1;
+
+  const correct = { q1: 'save_from_high', q2: '2_5', q3: 'liquid' };
+
+  function showStep(n){
+    step = n;
+    fieldsets.forEach(fs => fs.hidden = fs.dataset.step !== String(n));
+    [...stepper].forEach((chip, i) => chip.classList.toggle('active', i === n-1));
+    if(n === 5) buildSummary();
+  }
+
+  function getVals(name){
+    return [...form.querySelectorAll(`[name="${name}"]`)];
+  }
+  function oneChecked(name){
+    return getVals(name).some(i => i.checked);
+  }
+  function atLeastOneChecked(name){
+    return getVals(name).filter(i => i.checked).length > 0;
+  }
+  function showError(name, show=true){
+    const el = form.querySelector(`[data-error="${name}"]`);
+    if(el) el.style.display = show ? 'block' : 'none';
+  }
+
+  function validateStep(n){
+    let ok = true;
+    if(n===1){
+      if(!oneChecked('earn_type')) { showError('earn_type', true); ok=false; } else showError('earn_type', false);
+      if(!oneChecked('income_pattern')) { showError('income_pattern', true); ok=false; } else showError('income_pattern', false);
+    }
+    if(n===2){
+      if(!atLeastOneChecked('challenges')) { showError('challenges', true); ok=false; } else showError('challenges', false);
+      if(!oneChecked('goal')) { showError('goal', true); ok=false; } else showError('goal', false);
+    }
+    if(n===3){
+      if(!atLeastOneChecked('pref')) { showError('pref', true); ok=false; } else showError('pref', false);
+    }
+    if(n===4){
+      ['q1','q2','q3'].forEach(q=>{
+        if(!oneChecked(q)){ showError(q, true); ok=false; } else showError(q, false);
+      });
+    }
+    return ok;
+  }
+
+  function currentData(){
+    const data = {
+      earn_type: (form.querySelector('[name="earn_type"]:checked')||{}).value || null,
+      income_pattern: (form.querySelector('[name="income_pattern"]:checked')||{}).value || null,
+      challenges: getVals('challenges').filter(i=>i.checked).map(i=>i.value),
+      goal: (form.querySelector('[name="goal"]:checked')||{}).value || null,
+      preferences: getVals('pref').filter(i=>i.checked).map(i=>i.value),
+      quiz: {
+        q1: (form.querySelector('[name="q1"]:checked')||{}).value || null,
+        q2: (form.querySelector('[name="q2"]:checked')||{}).value || null,
+        q3: (form.querySelector('[name="q3"]:checked')||{}).value || null,
+      }
+    };
+    // quiz score
+    let score = 0;
+    Object.keys(correct).forEach(k=>{ if(data.quiz[k]===correct[k]) score++; });
+    data.quiz_score = score; // out of 3
+    return data;
+  }
+
+  function buildSummary(){
+    const data = currentData();
+    const pre = document.getElementById('summaryPre');
+    pre.textContent = JSON.stringify(data, null, 2);
+    document.getElementById('summaryBox').style.display = 'block';
+  }
+
+  // Simple rules to map goal -> path key used in content engine
+  function mapToPath(data){
+    const g = data.goal;
+    const chall = new Set(data.challenges);
+    // bias to explicit goal; fallback to strongest challenge
+    let pathKey = g;
+    if(!pathKey){
+      if(chall.has('taxes')) pathKey = 'taxes_freelance';
+      else if(chall.has('debt')) pathKey = 'debt_credit';
+      else if(chall.has('investing')) pathKey = 'investing_basics';
+      else if(chall.has('saving')) pathKey = 'emergency_savings';
+      else if(chall.has('irregular_income')) pathKey = 'budget_irregular';
+      else pathKey = 'long_term';
+    }
+    // small nudge from quiz score: high score can skip basics in Investing
+    const advancedHint = (pathKey==='investing_basics' && data.quiz_score>=3);
+    return { pathKey, advancedHint };
+  }
+
+  function pathLabel(key){
+    const map = {
+      budget_irregular: "Path 1 · Budgeting with Irregular Income",
+      emergency_savings: "Path 2 · Emergency Savings & Stability",
+      debt_credit: "Path 3 · Debt & Credit Management",
+      taxes_freelance: "Path 4 · Taxes for Freelancers & Gig Workers",
+      investing_basics: "Path 5 · Basics of Investing for Growth",
+      long_term: "Path 6 · Long-Term Wealth & Insurance"
+    };
+    return map[key] || key;
+  }
+
+  function pathChapters(key, advanced=false){
+    const chapters = {
+      budget_irregular: [
+        "Understanding Cash Flow", "Zero-Based Budgeting",
+        "Sinking Funds", "Tools for Irregular Income", "Quiz"
+      ],
+      emergency_savings: [
+        "Why Emergency Fund", "How Much to Save (3–6 months)",
+        "Automating Savings", "Where to Keep It", "Quiz"
+      ],
+      debt_credit: [
+        "Credit & Loans Basics", "Minimum Payments Risk",
+        "Snowball vs Avalanche", "Building Credit Score", "Quiz"
+      ],
+      taxes_freelance: [
+        "Self-Employed Tax Basics", "Tax Slabs (₹2.5L+)",
+        "GST & Invoicing (Advanced)", "Allowable Deductions", "Quiz"
+      ],
+      investing_basics: advanced
+        ? ["Mutual Fund Categories", "Index vs Active", "Risk & Asset Mix", "How to Pick SIPs", "Quiz"]
+        : ["Why Saving Isn’t Enough", "Stocks & Mutual Funds 101", "What is SIP", "Risk: Safe vs Risky", "Quiz"],
+      long_term: [
+        "Health Insurance", "Term Life Insurance",
+        "Retirement w/o PF/EPF", "Passive Income Ideas", "Quiz"
+      ]
+    };
+    return chapters[key] || [];
+  }
+
+  // nav buttons
+  form.addEventListener('click', (e)=>{
+    const nextBtn = e.target.closest('[data-next]');
+    const prevBtn = e.target.closest('[data-prev]');
+    if(nextBtn){
+      if(!validateStep(step)) return;
+      showStep(Math.min(5, step+1));
+    }
+    if(prevBtn){
+      showStep(Math.max(1, step-1));
+    }
+  });
+
+  // submit
+  form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    if(!validateStep(step)) return;
+
+    const data = currentData();
+    const { pathKey, advancedHint } = mapToPath(data);
+    const payload = {
+      user_id: "CURRENT_USER_ID", // replace after integrating auth
+      timestamp: new Date().toISOString(),
+      onboarding: data,
+      recommended_path: {
+        key: pathKey,
+        label: pathLabel(pathKey),
+        chapters: pathChapters(pathKey, advancedHint),
+        advanced_hint: advancedHint
+      }
+    };
+
+    // persist
+    try{
+      localStorage.setItem('onboardingData', JSON.stringify(payload));
+    }catch(err){ console.warn('localStorage not available', err); }
+
+    // UI output
+    const rec = document.getElementById('recText');
+    rec.innerHTML = `<div><strong>${payload.recommended_path.label}</strong></div>
+      <div class="hint" style="margin-top:6px">Chapters: ${payload.recommended_path.chapters.join(" · ")}</div>
+      <div class="hint" style="margin-top:6px">Quiz score: ${data.quiz_score}/3</div>`;
+    document.getElementById('payloadPre').textContent = JSON.stringify(payload, null, 2);
+    document.getElementById('resultBox').style.display = 'block';
+
+    // optional: navigate user to first chapter page here
+    // window.location.href = `/modules/${pathKey}/1`;
+  });
+
+  // real-time hide errors on choice
+  form.addEventListener('change', (e)=>{
+    const t = e.target;
+    if(t.name) showError(t.name, false);
+    if(t.name === 'challenges') showError('challenges', false);
+    if(t.name === 'pref') showError('pref', false);
+  });
+
+  // init
+  showStep(1);
+})();
+</script>
+</body>
+</html>
