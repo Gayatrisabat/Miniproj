@@ -28,6 +28,7 @@ The goal is to make financial education **simple, engaging, and accessible** for
 - **Backend**: Python (Flask/Django)  
 - **Database**: SQL (MySQL/PostgreSQL/SQLite)  
 - **APIs**: YouTube API for video content  
+##File structure
 
 backend/
 │── main.py                # FastAPI entry point
@@ -42,6 +43,28 @@ backend/
 │
 │── models/                # (Optional) Pydantic schemas
 │── .venv/                 # Virtual environment
+
+
+---
+
+## ⚙️ Backend Tech Stack
+- **FastAPI** – API framework  
+- **Firebase Firestore** – Database  
+- **Firebase Auth** – Authentication  
+- **Uvicorn** – ASGI server  
+
+---
+
+## ▶️ Running the Backend
+```bash
+# Activate virtual environment
+.\.venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the FastAPI server
+uvicorn main:app --reload
 
 
 
